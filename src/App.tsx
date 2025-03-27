@@ -23,12 +23,12 @@ function App() {
                 <span className="text-2xl font-bold text-gray-800">AutoMarket</span>
               </Link>
               
-              <div className="flex items-center space-x-6">
+              <div className="flex flex-wrap btn items-center space-x-6 md:space-x-4 lg:space-x-6">
                 {user ? (
                   <>
                     <Link
                       to="/new-listing"
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center space-x-2"
+                      className="bg-blue-600 btn-car text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center space-x-2"
                     >
                       <Car className="h-5 w-5" />
                       <span>Poster une annonce</span>
