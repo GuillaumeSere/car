@@ -17,7 +17,7 @@ function App() {
         <Toaster position="top-right" />
         <nav className="bg-white shadow-lg">
           <div className="container  mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center box justify-between">
               <Link to="/" className="flex items-center space-x-2">
                 <Car className="h-8 w-8 text-blue-600" />
                 <span className="text-2xl font-bold text-gray-800">AutoMarket</span>

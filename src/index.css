@@ -11,5 +11,8 @@
         font-size: 14px;
         padding: 0.5rem;
     }
+    .box{
+        flex-direction: column;
+    }
 }
 
