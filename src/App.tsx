@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import NewListing from './pages/NewListing';
 import MyListings from './pages/MyListings';
+import CarDetails from './pages/CarDetails';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/new-listing" element={<NewListing />} />
             <Route path="/my-listings" element={<MyListings />} />
+            <Route path="/car/:id" element={<CarDetails />} />
           </Routes>
         </main>
       </div>

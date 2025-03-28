@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
 import { Calendar, Gauge, Trash2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 interface Car {
   id: string;
@@ -137,7 +138,11 @@ export default function MyListings() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cars.map((car) => (
-            <div key={car.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+            <Link
+              key={car.id}
+              to={`/car/${car.id}`}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            >
               <div className="relative h-48">
                 <img
                   src={car.images[0] ? car.images[0] : 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80'}
@@ -173,7 +178,7 @@ export default function MyListings() {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
