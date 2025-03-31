@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
-import { Calendar, Gauge, Phone, Trash2, Mail } from 'lucide-react';
+import { Calendar, Gauge, Phone, Trash2, Mail, LogOut } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
@@ -131,8 +131,16 @@ export default function MyListings() {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-6">Mes annonces</h1>
-
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-3xl font-bold text-gray-800">Mes annonces</h1>
+                <Link
+                    to="/unsubscribe"
+                    className="flex items-center gap-2 px-4 py-2 text-red-600 hover:text-red-700 transition-colors"
+                >
+                    <LogOut className="h-5 w-5" />
+                    Supprimer mon compte
+                </Link>
+            </div>
             {cars.length === 0 ? (
                 <div className="text-center text-gray-600">
                     <p>Vous n'avez pas encore publié d'annonces.</p>
