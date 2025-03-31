@@ -15,7 +15,9 @@ export default function NewListing() {
         price: '',
         year: new Date().getFullYear(),
         mileage: '',
-        images: [] as (File | string)[], // Modification pour stocker les URL des images
+        images: [] as (File | string)[], 
+        phoneNumber: '', 
+        email: '',
     });
 
     const uploadImage = async (file: File, path: string) => {
@@ -95,7 +97,9 @@ export default function NewListing() {
                 price: parseFloat(formData.price),
                 year: formData.year,
                 mileage: parseInt(formData.mileage),
-                images: imageUrls, // Modification pour envoyer les URL des images
+                images: imageUrls, 
+                phoneNumber: formData.phoneNumber, 
+                email: formData.email, 
                 user_id: user.id,
             });
 
@@ -204,6 +208,32 @@ export default function NewListing() {
                             required
                         />
                     </div>
+
+                    <div>
+                        <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-1">
+                            Numéro de téléphone (facultatif)
+                        </label>
+                        <input
+                            id="phoneNumber"
+                            type="text"
+                            value={formData.phoneNumber}
+                            onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            Email 
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                    </div>
                 </div>
                 
                     <div>
@@ -234,6 +264,6 @@ export default function NewListing() {
                         {loading ? 'Publication en cours...' : 'Publier l\'annonce'}
                     </button>
                 </form>
-        </div>
+            </div>
     );
 }
