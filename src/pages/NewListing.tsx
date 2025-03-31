@@ -15,7 +15,7 @@ export default function NewListing() {
         price: '',
         year: new Date().getFullYear(),
         mileage: '',
-        images: [] as string[], // Modification pour stocker les URL des images
+        images: [] as (File | string)[], // Modification pour stocker les URL des images
     });
 
     const uploadImage = async (file: File, path: string) => {
@@ -110,12 +110,17 @@ export default function NewListing() {
     }
 
     function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const files = Array.from(e.target.files || []);
-        if (files.length > 3) {
+        const files = Array.from(e.target.files || []).slice(0, 3);
+        
+        if (files.length + formData.images.length > 3) {
             setError('Vous ne pouvez télécharger que 3 images maximum');
             return;
         }
-        setFormData({ ...formData, images: files });
+    
+        setFormData(prevState => ({
+            ...prevState,
+            images: [...prevState.images, ...files], // Ajout des nouvelles images
+        }));
     }
 
     return (

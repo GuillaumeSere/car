@@ -16,6 +16,7 @@ interface Car {
   created_at: string;
 }
 
+
 export default function MyListings() {
   const { user } = useAuth();
   const [cars, setCars] = useState<Car[]>([]);
