@@ -52,6 +52,7 @@ export default function Home() {
           Trouvez votre prochaine voiture
         </h1>
         <p className="text-xl text-gray-600">
+            Pour poster une annonce il faut vous inscrire<br/>
           Découvrez notre sélection de véhicules d'occasion
         </p>
       </div>
