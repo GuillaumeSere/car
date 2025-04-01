@@ -65,12 +65,19 @@ export default function CarDetails() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="space-y-4">
                     {car.images.map((image, index) => (
-                        <img
+                        <a
                             key={index}
-                            src={image}
-                            alt={`${car.title} - Image ${index + 1}`}
-                            className="w-full rounded-lg shadow-md"
-                        />
+                            href={image}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block"
+                        >
+                            <img
+                                src={image}
+                                alt={`${car.title} - Image ${index + 1}`}
+                                className="w-full rounded-lg shadow-md"
+                            />
+                        </a>
                     ))}
                 </div>
 
