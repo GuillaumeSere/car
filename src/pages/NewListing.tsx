@@ -7,7 +7,6 @@ import MapComponent from './MapComponent';
 export default function NewListing() {
     const navigate = useNavigate();
     const { user } = useAuthContext();
-    console.log(user);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showMap, setShowMap] = useState(false);
