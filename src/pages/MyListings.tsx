@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
-import { Calendar, Gauge, Phone, Trash2, Mail, LogOut } from 'lucide-react';
+import { Calendar, Gauge, Phone, Trash2, Mail, LogOut, MapPin } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,8 @@ interface Car {
     images: string[];
     created_at: string;
     phoneNumber: string;
-    email: string; // Ajout du champ email
+    email: string;
+    city: string;
 }
 
 export default function MyListings() {
@@ -76,7 +77,7 @@ export default function MyListings() {
                 .from('cars')
                 .delete()
                 .eq('id', carId)
-                .eq('user_id', user.id)
+                .eq('user_id', user?.id)
                 .select();
 
             console.log('Résultat de la suppression:', { deleteData, dbError });
@@ -164,7 +165,12 @@ export default function MyListings() {
                             <div className="p-6">
                                 <h2 className="text-xl font-semibold text-gray-800 mb-2">{car.title}</h2>
                                 <p className="text-gray-600 mb-4 line-clamp-2">{car.description}</p>
-
+                                {car.city && (
+                                    <div className="flex items-center gap-2 text-gray-600 mb-4">
+                                        <MapPin className="h-5 w-5" />
+                                        <span>{car.city}</span>
+                                    </div>
+                                )}
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center space-x-2 text-gray-600">
                                         <Calendar className="h-5 w-5" />
@@ -186,7 +192,7 @@ export default function MyListings() {
                                 {car.email && (
                                     <div className="text-gray-600 mb-4">
                                         <p className="flex items-center gap-2">
-                                            <Mail className="h-5 w-5" /> 
+                                            <Mail className="h-5 w-5" />
                                             {car.email}
                                         </p>
                                     </div>

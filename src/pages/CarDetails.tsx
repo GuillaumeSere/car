@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { Calendar, Gauge, Mail, Phone } from 'lucide-react';
+import MapComponent from './MapComponent';
+import { Calendar, Gauge, Mail, MapPin, Phone } from 'lucide-react';
 
 interface Car {
     id: string;
@@ -14,15 +15,21 @@ interface Car {
     created_at: string;
     phoneNumber: string;
     email: string;
+    city: string;
+    position: { lat: number, lng: number };
 }
 
 export default function CarDetails() {
     const { id } = useParams();
     const [car, setCar] = useState<Car | null>(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+    const [cityCoordinates, setCityCoordinates] = useState<{ lat: number, lng: number } | null>(null);
 
     useEffect(() => {
         async function fetchCar() {
+            setLoading(true);
+            setError('');
             try {
                 const { data, error } = await supabase
                     .from('cars')
@@ -32,6 +39,10 @@ export default function CarDetails() {
 
                 if (error) throw error;
                 setCar(data);
+
+                if (data?.city) {
+                    await fetchCityCoordinates(data.city); // Récupérer les coordonnées de la ville
+                }
             } catch (error) {
                 console.error('Erreur lors du chargement:', error);
             } finally {
@@ -39,8 +50,29 @@ export default function CarDetails() {
             }
         }
 
+        async function fetchCityCoordinates(city: string) {
+            try {
+                // Exemple avec OpenCage Geocoding API, vous pouvez remplacer par un autre service
+                const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=YOUR_API_KEY`);
+                const data = await response.json();
+
+                if (data.results && data.results.length > 0) {
+                    const { lat, lng } = data.results[0].geometry;
+                    setCityCoordinates({ lat, lng });
+                } else {
+                    setCityCoordinates(null);
+                    setError('Impossible de trouver les coordonnées pour cette ville.');
+                }
+            } catch (error) {
+                setError('Erreur lors de la récupération des coordonnées.');
+                console.error('Erreur géocodage:', error);
+            }
+        }
+
         fetchCar();
     }, [id]);
+
+    console.log("Car Details:", car);
 
     if (loading) {
         return (
@@ -104,20 +136,32 @@ export default function CarDetails() {
                                     </p>
                                 </div>
                             )}
-                                 {car.email && (
-                                    <div className="text-gray-600 m-5 mb-4">
-                                        <p className="flex items-center gap-2">
-                                            <Mail className="h-5 w-5" /> 
-                                            {car.email}
-                                        </p>
-                                    </div>
-                                )}
+                            {car.email && (
+                                <div className="text-gray-600 m-5 mb-4">
+                                    <p className="flex items-center gap-2">
+                                        <Mail className="h-5 w-5" />
+                                        {car.email}
+                                    </p>
+                                </div>
+                            )}
+                            {car.city && (
+                                <div className="flex items-center m-5 gap-2 text-gray-600 mb-4">
+                                    <MapPin className="h-5 w-5" />
+                                    <span>{car.city}</span>
+                                </div>
+                            )}
                         </div>
 
                         <p className="text-gray-600 m-5">{car.description}</p>
                     </div>
+                    {cityCoordinates ? (
+                        <MapComponent position={[cityCoordinates.lat, cityCoordinates.lng]} city={car.city} />
+                    ) : (
+                        <p className="text-gray-600 m-5">Coordonnées géographiques manquantes.</p>
+                    )}
                 </div>
             </div>
         </div>
     );
-} 
+}
+
