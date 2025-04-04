@@ -51,7 +51,7 @@ export default function MapComponent({ city }: MapComponentProps) {
 
   if (!position) return <p className="text-gray-500">Carte en attente...</p>;
   return (
-    <MapContainer center={position} zoom={12} style={{ height: "300px", width: "100%", borderRadius: "8px" }}>
+    <MapContainer center={position} zoom={12} style={{ height: "300px", width: "100%", borderRadius: "8px", zIndex: "0" }}>
       <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
