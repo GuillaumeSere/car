@@ -35,7 +35,7 @@ export default function MapComponent({ city }: MapComponentProps) {
           } else if (data.results[0].geometry){
             const { lat, lng } = data.results[0].geometry;
             setPosition([lat, lng]);
-            console.log('Résultat de la recherche:', data.results[0])
+            console.log('Résultat de la recherche:', data.results[0].geometry)
           } else {
             console.error("Coordonnées introuvables pour la ville :", city);
           }

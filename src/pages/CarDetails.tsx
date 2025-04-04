@@ -19,6 +19,8 @@ interface Car {
     position: { lat: number, lng: number };
 }
 
+const API_KEY = import.meta.env.VITE_SUPABASE_API_KEY;
+
 export default function CarDetails() {
     const { id } = useParams();
     const [car, setCar] = useState<Car | null>(null);
@@ -53,7 +55,7 @@ export default function CarDetails() {
         async function fetchCityCoordinates(city: string) {
             try {
                 // Exemple avec OpenCage Geocoding API, vous pouvez remplacer par un autre service
-                const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=YOUR_API_KEY`);
+                const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${API_KEY}`);
                 const data = await response.json();
 
                 if (data.results && data.results.length > 0) {

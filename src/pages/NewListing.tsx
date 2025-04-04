@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuthContext } from '../context/AuthContext';
-import MapComponent from './MapComponent';
 
 export default function NewListing() {
     const navigate = useNavigate();
@@ -10,7 +9,6 @@ export default function NewListing() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showMap, setShowMap] = useState(false);
-    const [mapError, setMapError] = useState('');
 
     const [formData, setFormData] = useState({
         title: '',
@@ -22,6 +20,7 @@ export default function NewListing() {
         phoneNumber: '',
         email: '',
         city: '',
+        position: [],
     });
 
     const uploadImage = async (file: File, path: string) => {
@@ -106,6 +105,7 @@ export default function NewListing() {
                 email: formData.email,
                 user_id: user.id,
                 city: formData.city,
+                position: formData.position,
             });
 
             if (error) throw error;
@@ -256,8 +256,6 @@ export default function NewListing() {
                     <button onClick={() => setShowMap(true)} className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Afficher la carte
                     </button>
-                    {mapError && <p className="text-red-500">{mapError}</p>}
-                    {showMap && formData.city && <MapComponent city={formData.city} position={{ lat: 0, lng: 0 }} />} 
                 </div>
 
                 <div>
