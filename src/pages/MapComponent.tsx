@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { LatLngExpression } from 'leaflet';
+import MarkerIcon from './MarkerIcon'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -55,7 +56,7 @@ export default function MapComponent({ city }: MapComponentProps) {
       <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <Marker position={position}>
+      <Marker position={position} icon={MarkerIcon}>
         <Popup>{city}</Popup>
       </Marker>
     </MapContainer>
