@@ -74,8 +74,6 @@ export default function CarDetails() {
         fetchCar();
     }, [id]);
 
-    console.log("Car Details:", car);
-
     if (loading) {
         return (
             <div className="flex justify-center items-center min-h-[50vh]">

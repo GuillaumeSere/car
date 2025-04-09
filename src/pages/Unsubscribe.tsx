@@ -25,6 +25,20 @@ export default function Unsubscribe() {
 
             if (carsError) throw carsError;
 
+            // Modification pour appeler la fonction de suppression d'utilisateur via fetch avec ajout de l'en-tête d'authentification
+            const response = await fetch('https://nlzbgmoxddfvzmvjntgi.supabase.co/functions/v1/delete-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_API_KEY}`,
+                },
+                body: JSON.stringify({ user_id: user.id }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erreur lors de la suppression de l\'utilisateur');
+            }
+
             // 2. Supprimer toutes les images des annonces
             for (const car of userCars || []) {
                 for (const imageUrl of car.images) {
@@ -52,9 +66,7 @@ export default function Unsubscribe() {
             if (deleteError) throw deleteError;
 
             // 4. Supprimer le compte utilisateur
-            const { error: userDeleteError } = await supabase.auth.admin.deleteUser(
-                user.id
-            );
+            const { error: userDeleteError } = await supabase.auth.admin.deleteUser(user.id);
 
             if (userDeleteError) throw userDeleteError;
 

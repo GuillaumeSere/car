@@ -8,6 +8,8 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [registered, setRegistered] = useState(false);
+  const [showValidationMessage, setShowValidationMessage] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -22,13 +24,19 @@ export default function Register() {
 
       if (error) throw error;
 
+      setRegistered(true); // Activation de l'état pour afficher le message de validation
+      setShowValidationMessage(true); // Activation de l'état pour afficher le message de validation jusqu'à ce que l'utilisateur clique dessus
       navigate('/');
     } catch (error) {
-      setError(error.message);
+      setError((error as Error).message); // Correction pour gérer l'erreur de type 'unknown'
     } finally {
       setLoading(false);
     }
   }
+
+  const handleValidationMessageClick = () => {
+    setShowValidationMessage(false); // Désactivation de l'état pour cacher le message de validation lorsque l'utilisateur clique dessus
+  };
 
   return (
     <div className="max-w-md mx-auto">
@@ -37,6 +45,12 @@ export default function Register() {
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
+        </div>
+      )}
+      
+      {showValidationMessage && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" onClick={handleValidationMessageClick}>
+          Vous êtes maintenant inscrit ! Veuillez valider votre email dans votre boîte mail.
         </div>
       )}
       

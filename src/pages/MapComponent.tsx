@@ -25,7 +25,7 @@ export default function MapComponent({ city }: MapComponentProps) {
           `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${API_KEY}`
         );
         const data = await response.json();
-        console.log(data)
+
         if (data && data.results && data.results.length > 0) {
           // Sélectionner la première coordonnée pour la ville, en prenant en compte le contexte
           const cityResult = data.results.find((result: { components: { type: string } }) => result.components.type === "city" || result.components.type === "town");
@@ -36,7 +36,6 @@ export default function MapComponent({ city }: MapComponentProps) {
           } else if (data.results[0].geometry){
             const { lat, lng } = data.results[0].geometry;
             setPosition([lat, lng]);
-            console.log('Résultat de la recherche:', data.results[0].geometry)
           } else {
             console.error("Coordonnées introuvables pour la ville :", city);
           }

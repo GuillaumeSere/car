@@ -52,8 +52,6 @@ export default function MyListings() {
     async function handleDelete(carId: string, imageUrls: string[]) {
         try {
             setLoading(true);
-            console.log('Début de la suppression pour carId:', carId);
-            console.log('Utilisateur actuel:', user?.id);
 
             // 1. Vérifier d'abord si l'annonce appartient à l'utilisateur
             const { data: carData, error: carError } = await supabase
@@ -61,8 +59,6 @@ export default function MyListings() {
                 .select('*')
                 .eq('id', carId)
                 .single();
-
-            console.log('Données de l\'annonce:', carData);
 
             if (carError) {
                 throw carError;
@@ -80,8 +76,6 @@ export default function MyListings() {
                 .eq('user_id', user?.id)
                 .select();
 
-            console.log('Résultat de la suppression:', { deleteData, dbError });
-
             if (dbError) {
                 throw dbError;
             }
@@ -92,7 +86,6 @@ export default function MyListings() {
                     // Extraction de l'URL publique de l'image à partir de la réponse JSON
                     const publicUrl = JSON.parse(imageUrl).data.publicUrl;
                     const filePath = publicUrl.split('car-images/')[1];
-                    console.log('Tentative de suppression de l\'image:', filePath);
 
                     if (filePath) {
                         const { error: storageError } = await supabase.storage
