@@ -26,7 +26,6 @@ export default function Register() {
 
       setRegistered(true); // Activation de l'état pour afficher le message de validation
       setShowValidationMessage(true); // Activation de l'état pour afficher le message de validation jusqu'à ce que l'utilisateur clique dessus
-      navigate('/');
     } catch (error) {
       setError((error as Error).message); // Correction pour gérer l'erreur de type 'unknown'
     } finally {
@@ -36,6 +35,7 @@ export default function Register() {
 
   const handleValidationMessageClick = () => {
     setShowValidationMessage(false); // Désactivation de l'état pour cacher le message de validation lorsque l'utilisateur clique dessus
+    navigate('/'); // Redirection après avoir cliqué sur le message de validation
   };
 
   return (
