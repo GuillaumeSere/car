@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://auto-market.vercel.app/sitemap.xml
+Sitemap: https://auto-markets.vercel.app/sitemap.xml
 
 

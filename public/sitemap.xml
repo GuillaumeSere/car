@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://auto-market.vercel.app/</loc>
+    <loc>https://auto-markets.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://auto-market.vercel.app/login</loc>
+    <loc>https://auto-markets.vercel.app/login</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://auto-market.vercel.app/register</loc>
+    <loc>https://auto-markets.vercel.app/register</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://auto-market.vercel.app/unsubscribe</loc>
+    <loc>https://auto-markets.vercel.app/unsubscribe</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://auto-market.vercel.app/new-listing</loc>
+    <loc>https://auto-markets.vercel.app/new-listing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://auto-market.vercel.app/my-listings</loc>
+    <loc>https://auto-markets.vercel.app/my-listings</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
